@@ -29,6 +29,8 @@ func main() {
 }
 
 func appendObjectContent(object iObjectWithContent) {
+	object.startTask()
+	defer object.endTask()
 	newValue := object.getContent() + "-"
 	object.setContent(newValue)
 }

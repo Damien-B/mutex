@@ -11,6 +11,10 @@ type objectWithMutex struct {
 	content string
 }
 
+func (object *objectWithMutex) startTask() {}
+
+func (object *objectWithMutex) endTask() {}
+
 func (object *objectWithMutex) setContent(value string) {
 	object.mu.Lock()
 	defer object.mu.Unlock()

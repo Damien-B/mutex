@@ -6,14 +6,18 @@ import (
 	"time"
 )
 
-type access interface {
-	setContent(value string)
-	getContent() string
-}
-
 type objectWithRWMutex struct {
 	mu      sync.RWMutex
+	task    sync.Mutex
 	content string
+}
+
+func (object *objectWithRWMutex) startTask() {
+	object.task.Lock()
+}
+
+func (object *objectWithRWMutex) endTask() {
+	object.task.Unlock()
 }
 
 func (object *objectWithRWMutex) setContent(value string) {
